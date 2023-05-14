@@ -8,7 +8,7 @@ void Train::addCage(bool light) {
     first = newCage;
     newCage->next = first;
     newCage->prev = first;
-  } else{
+  } else {
     Cage *lastCage = first->prev;
     newCage->prev = lastCage;
     newCage->next = first;
