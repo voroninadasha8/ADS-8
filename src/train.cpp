@@ -17,13 +17,26 @@ void Train::addCage(bool light) {
   }
 }
 int Train::getLength() {
-  int length = 0; // длина поезда
-  Cage *currentCage = first;
-  do {
-    length++;
-    currentCage = currentCage->next;
-  } while (currentCage != first);
-  return length;
+  Cage* tmpCage = first;
+  tmpCage->light = true;
+  int count = 1;
+  while (true) {
+    tmpCage = tmpCage->next;
+    if (tmpCage->light == false) {
+      count++;
+      countOp++;
+    } else {
+      countOp++;
+      tmpCage->light = false;
+      for (int i = count; i > 0; i--) {
+        tmpCage = tmpCage->prev;
+        countOp++;
+      }
+      if (tmpCage->light == false)
+        return count;
+      count = 1;
+    }
+  }
 }
 int Train::getOpCount() {
   return countOp;
